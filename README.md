@@ -26,8 +26,8 @@ Ensure you have the following installed:
 1. **Clone the Repository**
 
     ```bash
-    git clone https://yourrepositoryurl.com
-    cd your-project-directory
+    git clone https://github.com/Yazan-Abdullah/ContactManager.git
+    cd ContactManager
     ```
 
 2. **Navigate to the Project Directory**
