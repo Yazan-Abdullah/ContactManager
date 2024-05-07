@@ -38,11 +38,22 @@ Ensure you have the following installed:
 
 3. **Run the Application**
 
-    ```bash
-    dotnet run
-    ```
+   To run your Blazor WebAssembly project, you can follow these steps:
+   1-Open the Solution:
+   Open Visual Studio and load your .sln solution file.
+ 
+   2-Select Startup Project:
+   Ensure that the correct startup project is selected (typically Server for hosted Blazor WebAssembly or Client for standalone).
+   You can right-click the desired project and choose "Set as Startup Project."
 
-    This will start the application on `https://localhost:7089/`. Open this URL in a web browser to interact with the application.
+   3-Build the Solution:
+   Press Ctrl+Shift+B or go to the Build menu and click Build Solution.
+
+   4-Run the Project:
+   Press F5 to run in debug mode or Ctrl+F5 to run without debugging.
+   Your browser will open with the Blazor WebAssembly app running.
+
+   This will start the application on `https://localhost:7089/`. Open this URL in a web browser to interact with the application.
 
 ## Usage
 
