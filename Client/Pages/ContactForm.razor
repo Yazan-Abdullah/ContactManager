@@ -1,0 +1,18 @@
+@page "/contacts/add"
+@page "/contacts/edit/{ContactId:int}"
+@inject ContactService ContactService
+@inject NavigationManager NavigationManager
+
+<EditForm Model="@contact" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="contact.FirstName" Placeholder="First Name" Required />
+    <InputText @bind-Value="contact.LastName" Placeholder="Last Name" Required />
+    <InputText @bind-Value="contact.Email" Placeholder="Email" Required />
+    <InputText @bind-Value="contact.PhoneNumber" Placeholder="Phone Number" Required />
+
+    <button type="submit">Save</button>
+    <button @onclick="Cancel">Cancel</button>
+</EditForm>
+

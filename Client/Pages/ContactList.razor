@@ -1,0 +1,96 @@
+@page "/contacts"
+@inject ContactService ContactService
+@inject NavigationManager NavigationManager
+
+<h3>Contact List</h3>
+<button @onclick="AddNew">Add New Contact</button>
+
+@if (contacts == null || contacts.Count == 0)
+{
+    <p>No contacts available.</p>
+}
+else
+{
+    <table class="table contact-table">
+        <thead>
+            <tr>
+                <th @onclick="() => SortBy(nameof(Contact.FirstName))">First Name</th>
+                <th @onclick="() => SortBy(nameof(Contact.LastName))">Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>
+                        <button @onclick="() => Edit(contact.Id)">Edit</button>
+                        <button @onclick="() => Delete(contact.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Contact> contacts = new List<Contact>();
+    private bool ascending = true;
+    private string sortColumn = nameof(Contact.FirstName);
+
+    protected override void OnInitialized()
+    {
+        LoadContacts();
+    }
+
+    private void LoadContacts()
+    {
+        contacts = ContactService.GetAll().ToList();
+        SortContacts();
+    }
+
+    private void SortBy(string column)
+    {
+        if (sortColumn == column)
+        {
+            ascending = !ascending;
+        }
+        else
+        {
+            sortColumn = column;
+            ascending = true;
+        }
+        SortContacts();
+    }
+
+    private void SortContacts()
+    {
+        contacts = sortColumn switch
+        {
+            nameof(Contact.LastName) => ascending ? contacts.OrderBy(c => c.LastName).ToList() : contacts.OrderByDescending(c => c.LastName).ToList(),
+            _ => ascending ? contacts.OrderBy(c => c.FirstName).ToList() : contacts.OrderByDescending(c => c.FirstName).ToList()
+        };
+    }
+
+    private void AddNew()
+    {
+        NavigationManager.NavigateTo("/contacts/add");
+    }
+
+    private void Edit(int id)
+    {
+        NavigationManager.NavigateTo($"/contacts/edit/{id}");
+    }
+
+    private void Delete(int id)
+    {
+        ContactService.Delete(id);
+        LoadContacts();
+    }
+}

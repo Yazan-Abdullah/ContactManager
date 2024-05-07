@@ -1,0 +1,55 @@
+﻿/* ContactList.css */
+
+/* General table styles */
+.contact-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    .contact-table th,
+    .contact-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .contact-table th {
+        background-color: #f2f2f2;
+        cursor: pointer;
+    }
+
+    .contact-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .contact-table tbody tr:hover {
+        background-color: #ddd;
+    }
+
+    .contact-table th:hover {
+        background-color: #e0e0e0;
+    }
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
