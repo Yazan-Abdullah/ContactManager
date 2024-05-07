@@ -39,14 +39,36 @@ else
     </table>
 }
 
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
 @code {
     private List<Contact> contacts = new List<Contact>();
     private bool ascending = true;
     private string sortColumn = nameof(Contact.FirstName);
+    private string errorMessage;
+    private string successMessage;
 
     protected override void OnInitialized()
     {
-        LoadContacts();
+        try
+        {
+            LoadContacts();
+            successMessage = "Contacts loaded successfully!";
+            errorMessage = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to load contacts: {ex.Message}";
+            successMessage = string.Empty;
+        }
     }
 
     private void LoadContacts()
@@ -90,7 +112,17 @@ else
 
     private void Delete(int id)
     {
-        ContactService.Delete(id);
-        LoadContacts();
+        try
+        {
+            ContactService.Delete(id);
+            LoadContacts();
+            successMessage = "Contact deleted successfully.";
+            errorMessage = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting contact: {ex.Message}";
+            successMessage = string.Empty;
+        }
     }
 }
